@@ -1,0 +1,61 @@
+{
+  "about": "vowel, a formant filter that makes any sound say a, e, i, o, u: a level-8 effect (docs/level-8.md) in the unit's own lists of effects, for a sound (shift and T3) and for the master (the mixer's list), and on fx train's wagons. It stands on the unit's cwo: a sound saved with it keeps cwo's name and four knobs, switched off, and plays dry on a unit without the pack. Its four values on the knobs and the LFOs: vowel, shift, motion (envelope or a tempo-locked sweep from the block's period), mix. Shift + blue turns RES and shift + red LEVEL on its page, kept as the level-7 member vowel_layer with the synth's and drum's sounds and the master. A small working memory for each place, cleared at fresh. T3 shows its page, its own picture vowel-face.svg standing in for the effect's page: a head whose lips, jaw and tongue say the vowel, smaller and with the larynx higher as shift rises, a vowel chart, the motion at the throat and the mix as sound lines and a meter, dressed with the values as the sound plays them (level 10); without the picture it paints them on the base's blank page. It changes no place of the firmware, names no address of it and needs the base (level 10).",
+  "name": "vowel",
+  "version": 5,
+  "interface": 1,
+  "build": "build_r6e_vowel",
+  "sources": [
+    "examples/vowel/vowel.cpp",
+    "examples/vowel/vowel_card.s",
+    "examples/vowel/vowel_pictures.s"
+  ],
+  "works_with": [],
+  "serves": [],
+  "exports": [],
+  "pictures": [
+    {
+      "name": "vowel-face.svg",
+      "file": "examples/vowel/vowel-face.svg.make"
+    }
+  ],
+  "card": {
+    "level": 10,
+    "frame": "vowel_frame",
+    "pick": null,
+    "pictures": true,
+    "input": "vowel_input",
+    "asks": [
+      {
+        "kind": "effect",
+        "name": "vowel",
+        "rides": "cwo",
+        "mono": false,
+        "tails": false,
+        "cycles": 40000,
+        "state_bytes": 584,
+        "state_align": 4,
+        "process": "vowel_process",
+        "reset": null,
+        "shown": "vowel_shown",
+        "params": [
+          {"name": "vowel", "low": 0, "high": 32767, "start": 32767},
+          {"name": "shift", "low": 0, "high": 32767, "start": 16384},
+          {"name": "motion", "low": 0, "high": 32767, "start": 6000},
+          {"name": "mix", "low": 0, "high": 32767, "start": 26000}
+        ]
+      },
+      {
+        "kind": "keeps",
+        "name": "vowel",
+        "changed": "vowel_changed",
+        "keys": [
+          {"name": "vowel_layer", "files": ["synth", "drum", "master"]}
+        ]
+      }
+    ]
+  },
+  "marks": [],
+  "named": true,
+  "sum": true,
+  "path": null
+}
